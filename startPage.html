@@ -15,26 +15,19 @@
         
             <div class="nav navbar-right">
                 <a class="nav-link" href="startPage.html">Home</a>
-                <a class="nav-link" href="recipes.html">Recipes</a>
+                <a class="nav-link" href="about.html">About</a>
                 <a class="nav-link" href="restaurants.html">Restaurants</a>
             </div>
         </div>
     </nav>
 
-    <div id="page-contents">
-        <div class="row">
-            <div class="col-md-6">
-                <div id="recipes">
-                    <a href="recipes.html">Cook?</a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div id="restaurants">
-                    <a href="restaurants.html">Eat Out?</a>
-                </div>
-            </div>
-        </div>
+    <div id="restaurant-form">
+        <input type="text" id="zipCode" placeholder="Enter Zip Code">
+        <input type="text" id="search-word" placeholder="Search  ">
+        <input type="submit" id="search">
     </div>
+
+    <div id="restaurant-container"></div>
 
     <script src="assets/javaScript/app.js"></script>
 </body>
