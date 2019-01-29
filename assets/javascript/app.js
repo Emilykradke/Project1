@@ -2,10 +2,15 @@ var address;
 var name;
 var photo;
 var rating;
+var costForTwo;
+var phone;
+var menu;
+var index=0;
 
 
 $(document.body).on("click", "#search", function() {
     event.preventDefault();
+    
     var zipCode = $("#zipCode").val().trim();
     console.log(zipCode)
 
@@ -22,19 +27,21 @@ $(document.body).on("click", "#search", function() {
         var longitude = response.lat_long.longitude;
         console.log(longitude)
         
-        var searchTerm = $("#search-word").val().trim();
+        searchTerm = $("#search-word").val().trim();
 
-        var queryURL2 = "https://developers.zomato.com/api/v2.1/search?q=" + searchTerm + "&lat=" + latitude + "&lon=" + longitude + "&count=4&sort=real_distance&apikey=098ad5d6975d7ea08066552ab99e9d82"
+        var queryURL2 = "https://developers.zomato.com/api/v2.1/geocode?lat=" + latitude + "&lon=" + longitude +"&apikey=098ad5d6975d7ea08066552ab99e9d82";
         return $.ajax({
             url: queryURL2,
             method: "GET"
             })
         }).then(function(response){
             console.log(response)
-            var resID = response.restaurants[0].restaurant.id;
-            console.log(resID)
+            var entityID = response.location.entity_id;
+            console.log(entityID);
+            var entityType = response.location.entity_type;
+            console.log(entityType);
 
-            var queryURL3 = "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + resID + "&apikey=098ad5d6975d7ea08066552ab99e9d82";
+            var queryURL3 = "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityID + "&entity_type=" + entityType + "&q=" + searchTerm + "&sort=rating&apikey=098ad5d6975d7ea08066552ab99e9d82";
             $.ajax({
                 url: queryURL3,
                 method: "GET"
@@ -47,6 +54,9 @@ $(document.body).on("click", "#search", function() {
                 name = response.name;
                 console.log(name);
                 rating = response.user_rating.aggregate_rating;
+                console.log(rating);
+                costForTwo = response.average_cost_for_two;
+                console.log(costForTwo);
 
                 // create div for all of the restaurant information 
                 var restaurantDiv = $("<div>");
@@ -82,6 +92,7 @@ $(document.body).on("click", "#search", function() {
 
 $(document.body).on("click", ".photoClick", function() {
     $("#restaurant-container").empty();
+    index++;
 })
 
 
@@ -121,4 +132,3 @@ $(document.body).on("click", ".photoClick", function() {
 //         console.log(response);
 //     })
 // })
- 
