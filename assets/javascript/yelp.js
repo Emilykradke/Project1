@@ -11,83 +11,81 @@ var restaurants;
 var createRestCard = function(restaurants) {
 
     var queryURLyelpRest = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + restaurants.id
-            $.ajax({
-                url: queryURLyelpRest,
-                method: "GET",
-                dataType: "json",
-                headers: {
-                    "Authorization": "Bearer pTQUykRWiS1bm2vmyys495t9RcKg-SVvv72vC734JyFxrQEaveyZPQCKAMbg5MSMUCFaP13aBAtXoFtRY_xqXi3tCX5bOWsU-a4YiSMvywpYG9softopDf5O5XxOXHYx"
-                }
-            }).then(function(response) {
-                console.log(response);
+        $.ajax({
+            url: queryURLyelpRest,
+            method: "GET",
+            dataType: "json",
+            headers: {
+                "Authorization": "Bearer pTQUykRWiS1bm2vmyys495t9RcKg-SVvv72vC734JyFxrQEaveyZPQCKAMbg5MSMUCFaP13aBAtXoFtRY_xqXi3tCX5bOWsU-a4YiSMvywpYG9softopDf5O5XxOXHYx"
+            }
+        }).then(function(response) {
+            console.log(response);
+            
+            console.log(response.location.display_address[0])
+            name = response.name;
+            address = `${response.location.display_address[0]}
+            ${response.location.display_address[1]}`
+            photo1 = response.photos[0];
+            photo2 = response.photos[1];
+            photo3 = response.photos[2];
+            rating = response.rating;
+            price = response.price;
+            phone = response.display_phone;
+            
+            
+            // create div for all of the  restaurant information
+            var restaurantDiv = $("<div>");
+            
+            // create an image div for the restaurant images to go to and img divs for each photo
+            var photoDiv = $("<div>");
+            // give photoDiv a class
+            photoDiv.addClass("restaurantPhotos");
+            
+            var imgDiv1 = $("<img>");
+            var imgDiv2 = $("<img>");
+            var imgDiv3 = $("<img>");
                 
-                
-                
-                console.log(response.location.display_address[0])
-                name = response.name;
-                address = `${response.location.display_address[0]}
-                ${response.location.display_address[1]}`
-                photo1 = response.photos[0];
-                photo2 = response.photos[1];
-                photo3 = response.photos[2];
-                rating = response.rating;
-                price = response.price;
-                phone = response.display_phone;
-                
-                
-                // create div for all of the  restaurant information
-                var restaurantDiv = $("<div>");
-                
-                // create an image div for the restaurant images to go to and img divs for each photo
-                var photoDiv = $("<div>");
-                // give photoDiv a class
-                photoDiv.addClass("restaurantPhotos");
-                
-                var imgDiv1 = $("<img>");
-                var imgDiv2 = $("<img>");
-                var imgDiv3 = $("<img>");
-                
-    // give photoDiv attributes for image
-    imgDiv1.attr("src", photo1);
-    imgDiv1.addClass("slickImg")
-    imgDiv2.attr("src", photo2);
-    imgDiv2.addClass("slickImg")
-    imgDiv3.attr("src", photo3);
-    imgDiv3.addClass("slickImg")
-    // put the name variabe inside of a p tag
-    var pName = $("<p>").text(name);
+            // give photoDiv attributes for image
+            imgDiv1.attr("src", photo1);
+            imgDiv1.addClass("slickImg")
+            imgDiv2.attr("src", photo2);
+            imgDiv2.addClass("slickImg")
+            imgDiv3.attr("src", photo3);
+            imgDiv3.addClass("slickImg")
+            // put the name variabe inside of a p tag
+            var pName = $("<p>").text(name);
 
-    // put the rating into a p tag
-    var pRating = $("<p>").text(`Rating: ${rating}/5`);
+            // put the rating into a p tag
+            var pRating = $("<p>").text(`Rating: ${rating}/5`);
 
-    // put the address into a p tag
-    var pAddress = $("<p>").text(address);
-    
-    // put the phone number into a p tag
-    var pPhone = $("<p>").text(phone);
-    
-    // put the price into a p tag
-    var pPrice = $("<p>").text(`Price: ${price}`);
-    
-    // put all of the divs into the restaurantDiv
-    restaurantDiv.prepend(pRating);
-    restaurantDiv.prepend(pAddress);
-    restaurantDiv.prepend(pPhone);
-    restaurantDiv.prepend(pPrice);
-    restaurantDiv.prepend(pName);
-    
-    // append each image into the photoDiv
-    photoDiv.append(imgDiv1)
-    photoDiv.append(imgDiv2)
-    photoDiv.append(imgDiv3)
-    
-    // append the photoDiv into the restaurantDiv
-    restaurantDiv.prepend(photoDiv);
-    
-    // put the restaurantDiv into the restaurant-container div from the html
-    $("#restaurant-container").prepend(restaurantDiv);
-})
-}
+            // put the address into a p tag
+            var pAddress = $("<p>").text(address);
+            
+            // put the phone number into a p tag
+            var pPhone = $("<p>").text(phone);
+            
+            // put the price into a p tag
+            var pPrice = $("<p>").text(`Price: ${price}`);
+            
+            // put all of the divs into the restaurantDiv
+            restaurantDiv.prepend(pRating);
+            restaurantDiv.prepend(pAddress);
+            restaurantDiv.prepend(pPhone);
+            restaurantDiv.prepend(pPrice);
+            restaurantDiv.prepend(pName);
+            
+            // append each image into the photoDiv
+            photoDiv.append(imgDiv1)
+            photoDiv.append(imgDiv2)
+            photoDiv.append(imgDiv3)
+            
+            // append the photoDiv into the restaurantDiv
+            restaurantDiv.prepend(photoDiv);
+            
+            // put the restaurantDiv into the restaurant-container div from the html
+            $("#restaurant-container").prepend(restaurantDiv);
+        })
+    }
 
 
 $(document.body).on("click", "#search", function() {
@@ -95,17 +93,17 @@ $(document.body).on("click", "#search", function() {
 
     var zipCode = $("#zipCode").val().trim();
     
-    var queryURL = "https://proapi.whitepages.com/3.0/location?api_key=5f76840c732548e7a659bd72b687d8d1&postal_code=" + zipCode
+    var queryURL = "http://dataservice.accuweather.com/locations/v1/search?q=" + zipCode + "&apikey=93IHD7yLyLQ38YB3mDKE2xSQfPg20nHA"
    
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
         console.log(response)
-        var latitude = response.lat_long.latitude;
+        var latitude = response[0].GeoPosition.Latitude;
 
         console.log(latitude)
-        var longitude = response.lat_long.longitude;
+        var longitude = response[0].GeoPosition.Longitude;
         console.log(longitude)
     
         var miles = $("#radiusMiles").val();
@@ -143,7 +141,7 @@ $(document.body).on("click", "#search", function() {
             $(document.body).on("click", "#nextRestaurant", function() {
                 $("#restaurant-container").empty();
                 index++;
-                console.log((restaurants[index]))
+                console.log(restaurants[index])
                 createRestCard(restaurants[index])
                 // createRestCard(restaurants[index]);
                 //index =1

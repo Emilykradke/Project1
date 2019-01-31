@@ -7,7 +7,7 @@ var phone;
 var menu;
 var index=0;
 
-var createRestCard = function(restaurant[index])
+var createRestCard =(restaurants[index])
 
 
 $(document.body).on("click", "#search", function() {
@@ -48,7 +48,8 @@ $(document.body).on("click", "#search", function() {
                 url: queryURL3,
                 method: "GET"
             }).then(function(response) {
-                var restaurant = response.restaurants;
+                var restaurants = response.restaurants;
+                var createRestCard(restaurants[index])
                 console.log(response);
                 address = response.location.address;
                 console.log(address);
