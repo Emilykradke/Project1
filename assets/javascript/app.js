@@ -7,6 +7,8 @@ var phone;
 var menu;
 var index=0;
 
+var createRestCard = function(restaurant[index])
+
 
 $(document.body).on("click", "#search", function() {
     event.preventDefault();
@@ -46,6 +48,7 @@ $(document.body).on("click", "#search", function() {
                 url: queryURL3,
                 method: "GET"
             }).then(function(response) {
+                var restaurant = response.restaurants;
                 console.log(response);
                 address = response.location.address;
                 console.log(address);
@@ -93,6 +96,9 @@ $(document.body).on("click", "#search", function() {
 $(document.body).on("click", ".photoClick", function() {
     $("#restaurant-container").empty();
     index++;
+    //index =1
+
+
 })
 
 
