@@ -4,9 +4,15 @@ var photo;
 var rating;
 var phone;
 var price;
-var hours;
+var hoursOpen;
+var openArray = [];
+var hoursClosed;
+var closedArray = [];
+var days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
 var index = 0;
 var restaurants;
+// create div for all of the  restaurant information
+var restaurantDiv = $("<div>");
 
 var createRestCard = function(restaurants) {
 
@@ -31,10 +37,31 @@ var createRestCard = function(restaurants) {
             rating = response.rating;
             price = response.price;
             phone = response.display_phone;
+
+            for(var i = 0; i < 7; i++) {
+                hoursOpen = response.hours[0].open[i].start;
+                var openCon = moment(hoursOpen, 'HHmm').format('LT')
+                console.log(openCon)
+                openArray.push(openCon);
+                console.log(hoursOpen);
+                hoursClosed = response.hours[0].open[i].end;
+                var closedCon = moment(hoursClosed, 'HHmm').format('LT')
+                closedArray.push(closedCon);
+                console.log(hoursClosed);
+            }
+
+            for(var i = 0; i < 7; i++) {
+                var pHours = $("<p>").text(`${days[i]}: ${openArray[i]} - ${closedArray[i]}`);
+                console.log(pHours);
+
+                var hoursDiv = $("<div>");
+                hoursDiv.append(pHours);
+
+                
+            }
             
             
-            // create div for all of the  restaurant information
-            var restaurantDiv = $("<div>");
+            
             
             // create an image div for the restaurant images to go to and img divs for each photo
             var photoDiv = $("<div>");
@@ -79,6 +106,9 @@ var createRestCard = function(restaurants) {
             photoDiv.append(imgDiv2)
             photoDiv.append(imgDiv3)
             
+            // append hoursDiv to the restaurantDiv
+            restaurantDiv.append(hoursDiv);
+
             // append the photoDiv into the restaurantDiv
             restaurantDiv.prepend(photoDiv);
             
