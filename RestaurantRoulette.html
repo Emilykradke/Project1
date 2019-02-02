@@ -2,51 +2,113 @@
 <html>
 <head>
     <title>Start Page</title>
-    <link rel="stylesheet" type="text/css" href="assets/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="container" id="contents">
-            <div class="navbar-header">
-                <a href="startPage.html" class="navbar-brand" id="nav-name">Name</a>
-            </div>
-            
-            <div class="nav navbar-right">
-                <a class="nav-link" href="RestaurantRoulette.html">Home</a>
-                <a class="nav-link" href="about.html">About</a>
-                <a class="nav-link" href="restaurants.html">Restaurants</a>
+    <div class="wrapper">
+        <div class="banner">
+            <nav class="navbar" id="navbar">
+                <div class="container" id="contents">
+                    <div class="navbar-header">
+                        <a href="startPage.html" class="navbar-brand" id="nav-name">RR</a>
+                    </div>
+                    
+                    <div class="nav navbar-right">
+                        <a class="nav-link" href="RestaurantRoulette.html">Home</a>
+                        <a class="nav-link" href="about.html">About</a>
+                    </div>
+                </div>
+            </nav>
+
+            <h1 class="banner-heading">Restaurant Roulette</h1>
+            <h2 class="banner-subheading">Randomize your night</h2>
+        </div>
+
+        <div class="form-container">
+            <p class="instruction-text">Fill out the form fields below to find a restaurant near you!</p>
+            <div class="restaurant-form" id="restaurant-form">
+                <input type="text" class="text-field" id="zipCode" placeholder="Enter Zip Code">
+                <select class="selectpicker" id="radiusMiles">
+                    <option value="" disabled selected>Radius (miles)</option>
+                    <option value="5">5 mi</option>
+                    <option value="10">10 mi</option>
+                    <option value="15">15 mi</option>
+                    </select>
+                <input type="text" class="text-field" id="search-word" placeholder="Search">
+                <select class="selectpicker" id="price">
+                    <option value="" disabled selected>Price</option>
+                    <option value="1">$</option>
+                    <option value="2">$$</option>
+                    <option value="3">$$$</option>
+                    <option value="4">$$$$</option>
+                </select>
+                <input class="rr-btn search-btn" type="submit" id="search" value="Search">
             </div>
         </div>
-    </nav>
-    
-    <div id="restaurant-form">
-        <input type="text" id="zipCode" placeholder="Enter Zip Code">
-        <select class="selectpicker" id="radiusMiles">
-            <option value="" disabled selected>Radius (miles)</option>
-            <option value="5">5 mi</option>
-            <option value="10">10 mi</option>
-            <option value="15">15 mi</option>
-          </select>
-        <input type="text" id="search-word" placeholder="Search">
-        <select class="selectpicker" id="price">
-            <option value="" disabled selected>Price</option>
-            <option value="1">$</option>
-            <option value="2">$$</option>
-            <option value="3">$$$</option>
-            <option value="4">$$$$</option>
-          </select>
-          <input type="submit" id="search">
+
+        <div class="mobile-button-block">
+            <input type="submit" class="rr-btn" id="prevRestaurant" value="Back">
+            <input type="submit" class="rr-btn" id="nextRestaurant" value="Next">
+        </div>
+
+        <div class="restaurant-container">
+            <div class=".previous-button-container">
+                <input type="submit" class="rr-btn desktop-btn" id="prevRestaurant" value="Back">
+            </div>
+            <div class="restaurant-card" id="restaurant-card">
+                <!-- Card contents go here -->
+                <h2 class="restaurant-title" id="restaurant-title"></h2>
+                <img class="restaurant-photo" id="restaurant-photo" src="" alt="" />
+                <div class="restaurant-section">
+                    <span class="restaurant-label">Price:</span>
+                    <span class="restaurant-text" id="restaurant-price"></span>
+                </div>
+                <div class="restaurant-section">
+                        <span class="restaurant-label">Phone:</span>
+                    <span class="restaurant-text" id="restaurant-phone"></span>
+                </div>
+                <div class="restaurant-section">
+                    <span class="restaurant-label">Address:</span>
+                    <span class="restaurant-text" id="restaurant-address"></span>
+                </div>
+                <div class="restaurant-section">
+                    <span class="restaurant-label">Rating:</span>
+                    <span class="restaurant-text" id="restaurant-rating"></span>
+                </div>
+                <div class="restaurant-section">
+                    <p class="hours-title">Hours:</p>
+                    <div class="hours-block">
+                        <span class="day-of-week">Monday</span><span class="hours" id="hours-0"></span>
+                    </div>
+                    <div class="hours-block">
+                        <span class="day-of-week">Tuesday</span><span class="hours" id="hours-1"></span>
+                    </div>
+                    <div class="hours-block">
+                        <span class="day-of-week">Wednesday</span><span class="hours" id="hours-2"></span>
+                    </div>
+                    <div class="hours-block">
+                        <span class="day-of-week">Thursday</span><span class="hours" id="hours-3"></span>
+                    </div>
+                    <div class="hours-block">
+                        <span class="day-of-week">Friday</span><span class="hours" id="hours-4"></span>
+                    </div>
+                    <div class="hours-block">
+                        <span class="day-of-week">Saturday</span><span class="hours" id="hours-5"></span>
+                    <div class="hours-block">
+                    </div>
+                        <span class="day-of-week">Sunday</span><span class="hours" id="hours-6"></span>
+                    </div>
+                </div>
+            </div>
+            <div class=".next-button-container">
+                <input type="submit" class="rr-btn desktop-btn" id="nextRestaurant" value="Next">
+            </div>
+        </div>
+
     </div>
     
-    <div id="restaurant-container"></div>
-
-    <input type="submit" id="nextRestaurant">
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/slick/slick.min.js"></script>
     <script src="assets/javaScript/yelp.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
     

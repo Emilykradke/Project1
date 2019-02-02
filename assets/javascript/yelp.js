@@ -55,8 +55,9 @@ var createRestCard = function(restaurants) {
                 console.log(pHours);
 
                 var hoursDiv = $("<div>");
+                // append hoursDiv to the restaurantDiv
                 hoursDiv.append(pHours);
-
+                restaurantDiv.append(hoursDiv);
                 
             }
             
@@ -106,8 +107,7 @@ var createRestCard = function(restaurants) {
             photoDiv.append(imgDiv2)
             photoDiv.append(imgDiv3)
             
-            // append hoursDiv to the restaurantDiv
-            restaurantDiv.append(hoursDiv);
+            
 
             // append the photoDiv into the restaurantDiv
             restaurantDiv.prepend(photoDiv);
