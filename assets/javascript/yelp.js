@@ -73,7 +73,7 @@ $(document.body).on("click", "#search", function() {
 
     var zipCode = $("#zipCode").val().trim();
     
-    var queryURL = "http://dataservice.accuweather.com/locations/v1/search?q=" + zipCode + "&apikey=93IHD7yLyLQ38YB3mDKE2xSQfPg20nHA";
+    var queryURL = "https://dataservice.accuweather.com/locations/v1/search?q=" + zipCode + "&apikey=93IHD7yLyLQ38YB3mDKE2xSQfPg20nHA";
    
     $.ajax({
         url: queryURL,
