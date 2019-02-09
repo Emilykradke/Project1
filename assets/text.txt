@@ -1,0 +1,13 @@
+Future Developments: 
+geolocation: take user location and provide location data from google maps
+
+firebase favorites: create database for user to save their favorite restaurants 
+
+Explain API: 
+
+-Accuweather API: Accuweather has a location API that returns latitude and longitude based on a zip code. We then used the lat and long for the yelp api.
+
+-Yelp Fusion API: The yelp API gives you access to search for over 50,000,000 businesses in 32 countries. We were able to search for restaurants by location, distance, price, and search term in order to return a restaurant recommendation that would best suit the user. The yelp API also sorts the responses according to an adjusted rating value, taking into account the number of ratings along with the actual rating. This prevents skewing for businesses with a single review. 
+
+
+
